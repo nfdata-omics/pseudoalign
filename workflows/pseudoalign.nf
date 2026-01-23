@@ -21,10 +21,10 @@ include { UNTAR_SALMON_INDEX     } from '../modules/local/untar_salmon_index/mai
 workflow PSEUDOALIGN {
 
     take:
-    ch_samplesheet // channel: samplesheet read in from --input
-    ch_salmon_index
-    ch_fasta
-    ch_gtf
+    ch_samplesheet   // channel: samplesheet read in from --input
+    ch_salmon_index  // channel: salmon index folder
+    ch_fasta         // channel: transcriptome fasta
+    ch_gtf           // channel: gtf file
 
     main:
 
