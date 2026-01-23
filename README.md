@@ -15,6 +15,7 @@
 ## Introduction
 
 **nfdata-omics/pseudoalign** is a bioinformatics pipeline that ...
+I am adding this line to check what happens with the PR
 
 <!-- TODO nf-core:
    Complete this sentence with a 2-3 sentence summary of what types of data the pipeline ingests, a brief overview of the
