@@ -45,11 +45,18 @@ workflow NFDATAOMICS_PSEUDOALIGN {
 
     main:
 
+    ch_transcript_fasta = channel.value(file(params.transcript_fasta, checkIfExists: true))
+    ch_gtf              = channel.value(file(params.gtf, checkIfExists: true))
+    ch_salmon_index     = channel.value(file(params.salmon_index, checkIfExists: true))
+
     //
     // WORKFLOW: Run pipeline
     //
     PSEUDOALIGN (
-        samplesheet
+        samplesheet,
+        ch_salmon_index,
+        ch_transcript_fasta,
+        ch_gtf
     )
     emit:
     multiqc_report = PSEUDOALIGN.out.multiqc_report // channel: /path/to/multiqc_report.html

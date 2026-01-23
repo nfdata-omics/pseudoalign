@@ -10,3 +10,13 @@ multiqc/multiqc_plots/{svg,pdf,png}/*.{svg,pdf,png}
 multiqc/multiqc_report.html
 fastqc/*_fastqc.{html,zip}
 pipeline_info/*.{html,json,txt,yml}
+multiqc/multiqc_data/multiqc_salmon.txt
+multiqc/multiqc_data/salmon_plot.txt
+salmon/*/aux_info/fld.gz
+salmon/*/aux_info/meta_info.json
+salmon/*/libParams/flenDist.txt
+salmon/*/logs/salmon_quant.log
+salmon/*/quant.genes.sf
+salmon/*/quant.sf
+salmon/salmon.*
+salmon/*meta_info.json

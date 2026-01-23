@@ -79,8 +79,21 @@
                     "fa_icon": "fas fa-ban",
                     "hidden": true,
                     "default": "s3://ngi-igenomes/igenomes/"
+                },
+                "transcript_fasta": {
+                    "type": "string",
+                    "description": "Path to FASTA transcriptomic file."
+                },
+                "gtf": {
+                    "type": "string",
+                    "description": "Path to GFT genome annotation file."
+                },
+                "salmon_index": {
+                    "type": "string",
+                    "description": "Path to Salmon index for the transcriptome."
                 }
-            }
+            },
+            "required": ["transcript_fasta", "gtf", "salmon_index"]
         },
         "institutional_config_options": {
             "title": "Institutional config options",

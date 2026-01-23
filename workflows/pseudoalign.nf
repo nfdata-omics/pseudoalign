@@ -9,6 +9,8 @@ include { paramsSummaryMap       } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_pseudoalign_pipeline'
+include { SALMON_QUANT           } from '../modules/nf-core/salmon/quant/main'
+include { UNTAR_SALMON_INDEX     } from '../modules/local/untar_salmon_index/main'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -20,6 +22,10 @@ workflow PSEUDOALIGN {
 
     take:
     ch_samplesheet // channel: samplesheet read in from --input
+    ch_salmon_index
+    ch_fasta
+    ch_gtf
+
     main:
 
     ch_versions = channel.empty()
@@ -32,6 +38,30 @@ workflow PSEUDOALIGN {
     )
     ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]})
     ch_versions = ch_versions.mix(FASTQC.out.versions.first())
+
+    //
+    // MODULE: Untar Salmon Index when needed
+    //
+    if ( params.salmon_index.endsWith('.tar.gz') ) {
+        UNTAR_SALMON_INDEX ( ch_salmon_index )
+        ch_salmon_index_folder = UNTAR_SALMON_INDEX.out.untar
+        ch_versions = ch_versions.mix(UNTAR_SALMON_INDEX.out.versions)
+    } else {
+        ch_salmon_index_folder = ch_salmon_index
+    }
+
+    //
+    // MODULE: Run Salmon Quant
+    //
+    SALMON_QUANT (
+        ch_samplesheet,
+        ch_salmon_index_folder,
+        ch_gtf,
+        ch_fasta,
+        "",
+        ""
+    )
+    ch_multiqc_files = ch_multiqc_files.mix(SALMON_QUANT.out.results.collect{it[1]})
 
     //
     // Collate and save software versions

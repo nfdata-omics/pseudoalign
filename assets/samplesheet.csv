@@ -1,3 +1,4 @@
-sample,fastq_1,fastq_2
-SAMPLE_PAIRED_END,/path/to/fastq/files/AEG588A1_S1_L002_R1_001.fastq.gz,/path/to/fastq/files/AEG588A1_S1_L002_R2_001.fastq.gz
-SAMPLE_SINGLE_END,/path/to/fastq/files/AEG588A4_S4_L003_R1_001.fastq.gz,
+sample,fastq_1,fastq_2,strandedness
+sample1,reads_1_R1.fastq.gz,reads_1_R2.fastq.gz,reverse
+sample2,reads_2_R1.fastq.gz,reads_2_R2.fastq.gz,reverse
+sample3,reads_3_R1.fastq.gz,,forward
