@@ -10,6 +10,7 @@ Initial release of nfdata-omics/pseudoalign, created with the [nf-core](https://
 ### `Added`
 
 ### `Fixed`
+- pippo
 
 ### `Dependencies`
 
